@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import "./App.css";
+import store from "./redux/store";
+
+import Authroute from "./component/Authroute";
+import Homepage from "./component/Homepage/Homepage";
+import Login from "./component/Login/Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./component/navbar/Navbar";
+import Album from "./component/Album/Album";
+import Todo from "./component/Todo/Todo";
+import Error404 from "./component/Error404/Error404";
+import PostLayout from "./component/Homepage/PostLayout/PostLayout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <Authroute>
+                <Homepage />
+              </Authroute>
+            }
+          />
+          <Route
+              path="posts/:id"
+              element={
+                <Authroute>
+                  <PostLayout />
+                </Authroute>
+              }
+            />
+          <Route
+            path="/album"
+            element={
+              <Authroute>
+                <Album />
+              </Authroute>
+            }
+          />
+          <Route
+            path="/todo"
+            element={
+              <Authroute>
+                <Todo />
+              </Authroute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

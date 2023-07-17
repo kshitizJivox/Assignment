@@ -1,0 +1,41 @@
+.mainContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    min-height: 60px;
+    width: 100vw;
+    background-color: #091a2f;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 5;
+    padding: 0 20px;
+}
+
+.mainContainer svg{
+    color: white;
+    height: 40px;
+    width: 25px;
+    cursor: pointer;
+}
+
+.mainContainer img{
+    height: 50px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.navContainer{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navContainer a{
+    color: rgba(255, 255, 255, 0.898);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
