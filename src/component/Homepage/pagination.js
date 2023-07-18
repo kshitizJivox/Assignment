@@ -4,7 +4,7 @@ import React, {
   useState
 } from "react";
 import classes from './pagination.module.css'
-import PostHolder from "./PostHolder/PostHolder";
+import ContentHolder from "../../utility/contentHolder/ContentHolder";
 import { useDispatch, useSelector } from "react-redux";
 import { paginatedPostsHandler } from "./redux/HomepageAction";
 
@@ -28,7 +28,7 @@ function PaginatedPosts({ postsPerPage }) {
 
   return (
     <div className={classes.mainContainer}>
-      <PostHolder posts={toBeRenderedPosts} />
+      <ContentHolder content={toBeRenderedPosts} type={1}/>
       <ReactPaginate
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}

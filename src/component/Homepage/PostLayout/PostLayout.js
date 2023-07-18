@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./PostLayout.module.css";
-import Post from "../PostHolder/Post/Post";
+import Post from "../Post/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { requestingSinglePost } from "../redux/HomepageAction";
 import { useLocation, useNavigate } from "react-router-dom";

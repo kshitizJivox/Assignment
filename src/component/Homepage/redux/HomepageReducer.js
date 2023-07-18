@@ -9,13 +9,13 @@ import {
 } from "./HomepageActionType";
 
 const initialState = {
-  loading: false,
-  posts: [],
-  error: "",
-  toBeRenderedPosts: [],
-  paginatePost : [],
-  comment : {},
-  singlePost : {}
+  loading: false, // For API fetch time
+  posts: [], // Total posts from the API
+  error: "", // Error in fetching
+  toBeRenderedPosts: [], // Actual posts which are getting displayed
+  paginatePost : [], // Stores the result of total posts / search result
+  comment : {}, // comments of the posts
+  singlePost : {} // single post details
 };
 
 const HomepageReducer = (state = initialState, action) => {

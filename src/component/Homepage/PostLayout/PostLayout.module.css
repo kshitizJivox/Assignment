@@ -47,7 +47,7 @@
 
 .postContainer {
   width: 100%;
-  min-height: 400px;
+  min-height: 420px;
   border: 1px solid rgba(128, 128, 128, 0.1);
 }
 
@@ -55,9 +55,11 @@
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
-    margin-top: 10px;
+    margin: 10px 0;
 }
 
 .postButtonContainer span{
     cursor: pointer;
+    font-size: 14px;
+    font-weight: 300;
 }

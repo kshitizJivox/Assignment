@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./Post.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { requestingComments } from "../../redux/HomepageAction";
+import { requestingComments } from "../redux/HomepageAction";
 import Comment from "./Comment";
 import { useNavigate } from "react-router-dom";
 
