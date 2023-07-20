@@ -1,16 +1,20 @@
 import classes from "./ContentHolder.module.css";
 import Post from "../../component/Homepage/Post/Post";
 import Photo from "../../component/Album/Photo/Photo";
+import UserTodo from "../../component/Todo/TodoBlock/TodoBlock";
 
 function ContentHolder({ content, type }) {
   return (
     <div className={classes.mainContainer}>
       {content.map((content, i) => {
-        return type == 1 ? (
-          <Post key={i} postData={content} />
-        ) : (
-          <Photo key={i} photoData={content} />
-        );
+        switch (type) {
+          case 1:
+            return <Post key={i} postData={content} />;
+          case 2:
+            return <Photo key={i} photoData={content} />;
+          case 3:
+            return <UserTodo key={i} todo={content} />;
+        }
       })}
     </div>
   );

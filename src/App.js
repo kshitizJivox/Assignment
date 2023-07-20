@@ -12,6 +12,7 @@ import Todo from "./component/Todo/Todo";
 import Error404 from "./component/Error404/Error404";
 import PostLayout from "./component/Homepage/PostLayout/PostLayout";
 import Layout from "./component/Album/Layout/Layout";
+import UserTodo from "./component/Todo/UserTodo/UserTodo";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
             path="/album"
             element={
               <Authroute>
-                <Album />
+                <Album/>
               </Authroute>
             }
           />
@@ -60,6 +61,14 @@ function App() {
               </Authroute>
             }
           />
+          <Route
+              path="todo/:id"
+              element={
+                <Authroute>
+                  <UserTodo />
+                </Authroute>
+              }
+            />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Error404 />} />
         </Routes>

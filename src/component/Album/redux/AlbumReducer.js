@@ -32,7 +32,7 @@ import {
           ...state,
           loading: false,
           albums: action.payload.albums,
-          toBeRenderedAlbums: action.payload.albums.slice(0, action.payload.albumsPerPages),
+          toBeRenderedAlbums: state.toBeRenderedAlbums.concat(action.payload.albums),
           albumPool : action.payload.albums,
           error : ""
         };

@@ -55,16 +55,6 @@ export const searchHandler = (searchValue, albums) => {
   };
 };
 
-export const paginatedAlbumHandler = (start, end) => {
-  return {
-    type: PAGINATED_ALBUM,
-    payload: {
-      start: start,
-      end: end,
-    },
-  };
-};
-
 const singleAlbumHandler = (album) => {
   return {
     type: REQUEST_SINGLE_ALBUM,
@@ -72,12 +62,13 @@ const singleAlbumHandler = (album) => {
   };
 };
 
-export const requestingAlbum = (albumsPerPage) => {
+export const requestingAlbum = (start, albumsPerPage) => {
   return (dispatch) => {
     dispatch(requestAlbumHandler());
-
+        
+    // console.log("[start]", start);
     axios
-      .get("https://jsonplaceholder.typicode.com/photos")
+      .get(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${albumsPerPage}`)
       .then((res) => {
         const albums = res.data;
         let albumId = res.data[0].albumId;

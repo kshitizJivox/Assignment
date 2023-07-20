@@ -8,11 +8,12 @@ function Photo({ photoData }) {
 
   const photoClickHandler = () => {
     console.log("[Naviagte to Album]", photo.albumId);
+    navigate("/album/" + photo.albumId)
   }
 
   return (
     <div className={classes.mainContainer} onClick={() => photoClickHandler()}>
-      <img src={photo.url} />
+      <img src={photo.url} loading="lazy"/>
       <div className={classes.photoDetails}>
         <h5>{photo.title}</h5>
         <div>
