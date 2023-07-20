@@ -11,7 +11,7 @@ function ContentHolder({ content, type }) {
           case 1:
             return <Post key={i} postData={content} />;
           case 2:
-            return <Photo key={i} photoData={content} />;
+            return <Photo key={i} photoData={content[0]} />;
           case 3:
             return <UserTodo key={i} todo={content} />;
         }

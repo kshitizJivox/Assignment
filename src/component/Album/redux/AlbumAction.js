@@ -66,7 +66,6 @@ export const requestingAlbum = (start, albumsPerPage) => {
   return (dispatch) => {
     dispatch(requestAlbumHandler());
         
-    // console.log("[start]", start);
     axios
       .get(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${albumsPerPage}`)
       .then((res) => {
@@ -96,25 +95,11 @@ export const requestingAlbum = (start, albumsPerPage) => {
   };
 };
 
-export const requestingComments = (postId) => {
-  return (dispatch) => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/comments?postId=" + postId)
-      .then((res) => {
-        const comment = res.data;
-        dispatch(succesComment(comment, postId));
-      })
-      .catch((error) => {
-        const err = error.message;
-      });
-  };
-};
-
-export const requestingSingleAlbum = (postId) => {
+export const requestingSingleAlbum = (albumId) => {
   return (dispatch) => {
     dispatch(requestAlbumHandler());
     axios
-      .get("https://jsonplaceholder.typicode.com/posts/" + postId)
+      .get(`https://jsonplaceholder.typicode.com/photos?albumId=`+ albumId)
       .then((res) => {
         const post = res.data;
         dispatch(singleAlbumHandler(post));

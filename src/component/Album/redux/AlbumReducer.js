@@ -14,8 +14,7 @@ import {
     error: "",
     toBeRenderedAlbums: [],
     albumPool : [],
-    comment : {},
-    singleAlbum : {}
+    singleAlbum : []
   };
   
   const AlbumReducer = (state = initialState, action) => {

@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 function Photo({ photoData }) {
   const navigate = useNavigate();
-  const photo = photoData[0];
+  const photo = photoData;
 
   const photoClickHandler = () => {
-    console.log("[Naviagte to Album]", photo.albumId);
     navigate("/album/" + photo.albumId)
   }
 
