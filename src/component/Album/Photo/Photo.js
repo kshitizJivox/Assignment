@@ -1,17 +1,11 @@
 import React from "react";
 import classes from "./Photo.module.css";
-import { useNavigate } from "react-router-dom";
 
 function Photo({ photoData }) {
-  const navigate = useNavigate();
   const photo = photoData;
 
-  const photoClickHandler = () => {
-    navigate("/album/" + photo.albumId)
-  }
-
   return (
-    <div className={classes.mainContainer} onClick={() => photoClickHandler()}>
+    <div className={classes.mainContainer}>
       <img src={photo.url} loading="lazy"/>
       <div className={classes.photoDetails}>
         <h5>{photo.title}</h5>

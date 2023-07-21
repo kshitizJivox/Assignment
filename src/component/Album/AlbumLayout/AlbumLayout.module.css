@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .mainContainer {
+    width: 100%;
+    padding: 10px 30px;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+  }
+  
+  .userDataContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-left: 5px;
+  }
+  
+  .userDataContainer img {
+    height: 35px;
+    width: 35px;
+    border-radius: 20px;
+    object-fit: contain;
+    margin-right: 4px;
+  }
+  
+  .userDataContainer p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .userDataContainer p:nth-child(1) {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  
+  .albumContainer h4 {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .album li {
+    font-size: 12px;
+    font-weight: 300;
+    cursor: pointer;
+  }
+  
+  .isCompleted {
+    color: #009b00;
+  }
+  
+  .notCompleted{
+      color : red
+  }
+  

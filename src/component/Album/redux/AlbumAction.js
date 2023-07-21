@@ -15,13 +15,10 @@ export const requestAlbumHandler = () => {
   };
 };
 
-export const successAlbumHandler = (albums, albumsPerPages) => {
+export const successAlbumHandler = (albums) => {
   return {
     type: SUCCESS_ALBUM,
-    payload: {
-      albumsPerPages: albumsPerPages,
-      albums: albums,
-    },
+    payload: albums,
   };
 };
 
@@ -32,26 +29,22 @@ export const failAlbumHandler = (error) => {
   };
 };
 
-const succesComment = (comment, albumId) => {
-  return {
-    type: REQUEST_COMMENT,
-    payload: {
-      comment: comment,
-      albumId: albumId,
-    },
-  };
-};
+export const searchHandler = (val, albums) => {
+  let temp = [];
 
-export const searchHandler = (searchValue, albums) => {
-  let temp = [...albums];
-  let toBeRenderedAlbums = [];
+  albums.map((album) => {
+    let resultAlbum = [];
+    album.map((task) => {
+      if (task.title.includes(val)) resultAlbum.push(task);
+    });
 
-  temp.map((album) => {
-    if (album.title.includes(searchValue)) toBeRenderedAlbums.push(album);
+    if(resultAlbum.length != 0)
+        temp.push(resultAlbum);
   });
+
   return {
     type: SEARCH,
-    payload: toBeRenderedAlbums,
+    payload: temp,
   };
 };
 
@@ -62,31 +55,31 @@ const singleAlbumHandler = (album) => {
   };
 };
 
-export const requestingAlbum = (start, albumsPerPage) => {
+export const requestingAlbum = () => {
   return (dispatch) => {
     dispatch(requestAlbumHandler());
-        
+
     axios
-      .get(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${albumsPerPage}`)
+      .get(`https://jsonplaceholder.typicode.com/albums`)
       .then((res) => {
         const albums = res.data;
-        let albumId = res.data[0].albumId;
-        let albumArray = [];
+        let userId = res.data[0].userId;
+        let temp = [];
         let newAlbum = [];
 
         albums.map((album) => {
-          if (album.albumId == albumId) {
-            albumArray.push(album);
+          if (album.userId == userId) {
+            temp.push(album);
           } else {
-            albumId = album.albumId;
-            newAlbum.push(albumArray);
-            albumArray = [];
-            albumArray.push(album);
+            userId = album.userId;
+            newAlbum.push(temp);
+            temp = [];
+            temp.push(album);
           }
         });
 
-        newAlbum.push(albumArray)
-          dispatch(successAlbumHandler(newAlbum, albumsPerPage));
+        newAlbum.push(temp);
+        dispatch(successAlbumHandler(newAlbum));
       })
       .catch((error) => {
         const err = error.message;
@@ -99,7 +92,7 @@ export const requestingSingleAlbum = (albumId) => {
   return (dispatch) => {
     dispatch(requestAlbumHandler());
     axios
-      .get(`https://jsonplaceholder.typicode.com/photos?albumId=`+ albumId)
+      .get(`https://jsonplaceholder.typicode.com/photos?albumId=` + albumId)
       .then((res) => {
         const post = res.data;
         dispatch(singleAlbumHandler(post));

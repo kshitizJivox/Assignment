@@ -30,9 +30,9 @@ import {
         return {
           ...state,
           loading: false,
-          albums: action.payload.albums,
-          toBeRenderedAlbums: state.toBeRenderedAlbums.concat(action.payload.albums),
-          albumPool : action.payload.albums,
+          albums: action.payload,
+          toBeRenderedAlbums: action.payload,
+          albumPool : action.payload,
           error : ""
         };
   
@@ -60,6 +60,7 @@ import {
         return {
           ...state,
           albumPool: action.payload,
+          toBeRenderedAlbums : action.payload
         };
   
       case PAGINATED_ALBUM: {

@@ -17,19 +17,19 @@
 .postButtonContainer{
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    align-items: center;
     margin: 10px 0;
     margin-top: 100px;
-    width: 50%;
+    width: 60%;
 }
 
 .postButtonContainer span{
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 300;
 }
 
 .postButtonContainer span:nth-child(2){
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
 }

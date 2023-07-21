@@ -1,7 +1,7 @@
 import classes from "./ContentHolder.module.css";
 import Post from "../../component/Homepage/Post/Post";
-import Photo from "../../component/Album/Photo/Photo";
 import UserTodo from "../../component/Todo/TodoBlock/TodoBlock";
+import AlbumLayout from "../../component/Album/AlbumLayout/AlbumLayout";
 
 function ContentHolder({ content, type }) {
   return (
@@ -11,7 +11,7 @@ function ContentHolder({ content, type }) {
           case 1:
             return <Post key={i} postData={content} />;
           case 2:
-            return <Photo key={i} photoData={content[0]} />;
+            return <AlbumLayout key={i} albumData={content} />;
           case 3:
             return <UserTodo key={i} todo={content} />;
         }
