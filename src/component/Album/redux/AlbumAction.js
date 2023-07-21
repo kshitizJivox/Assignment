@@ -1,11 +1,10 @@
 import axios from "axios";
 import {
   FAIL_ALBUM,
-  PAGINATED_ALBUM,
-  REQUEST_COMMENT,
   REQUEST_ALBUM,
   REQUEST_SINGLE_ALBUM,
-  SEARCH,
+  SEARCH_ALBUM,
+  SEARCH_PHOTO,
   SUCCESS_ALBUM,
 } from "./AlbumActionType";
 
@@ -29,7 +28,7 @@ export const failAlbumHandler = (error) => {
   };
 };
 
-export const searchHandler = (val, albums) => {
+export const searchAlbumHandler = (val, albums) => {
   let temp = [];
 
   albums.map((album) => {
@@ -38,13 +37,25 @@ export const searchHandler = (val, albums) => {
       if (task.title.includes(val)) resultAlbum.push(task);
     });
 
-    if(resultAlbum.length != 0)
-        temp.push(resultAlbum);
+    if (resultAlbum.length != 0) temp.push(resultAlbum);
   });
 
   return {
-    type: SEARCH,
+    type: SEARCH_ALBUM,
     payload: temp,
+  };
+};
+
+export const searchPhotoHandler = (val, photos) => {
+  let resPhoto = [];
+
+  photos.map((photo) => {
+    if (photo.title.includes(val)) resPhoto.push(photo);
+  });
+
+  return {
+    type: SEARCH_PHOTO,
+    payload: resPhoto,
   };
 };
 

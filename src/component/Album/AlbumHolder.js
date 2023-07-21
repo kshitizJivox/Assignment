@@ -3,7 +3,7 @@ import classes from "./AlbumHolder.module.css";
 import ContentHolder from "../../utility/contentHolder/ContentHolder";
 import { useDispatch, useSelector } from "react-redux";
 import SearchBar from "../../utility/SearchBar/SearchBar";
-import { searchHandler } from "./redux/AlbumAction";
+import { searchAlbumHandler } from "./redux/AlbumAction";
 
 function AlbumHolder() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function AlbumHolder() {
     <div className={classes.mainContainer}>
       <SearchBar
         placeholder="Search by album title..."
-        searchResultHandler={(val) => dispatch(searchHandler(val, albums))}
+        searchResultHandler={(val) => dispatch(searchAlbumHandler(val, albums))}
       />
       <ContentHolder content={toBeRenderedAlbums} type={2} />
     </div>

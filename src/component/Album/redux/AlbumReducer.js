@@ -6,6 +6,8 @@ import {
     REQUEST_SINGLE_ALBUM,
     SEARCH,
     SUCCESS_ALBUM,
+    SEARCH_ALBUM,
+    SEARCH_PHOTO,
   } from "./AlbumActionType";
   
   const initialState = {
@@ -14,7 +16,8 @@ import {
     error: "",
     toBeRenderedAlbums: [],
     albumPool : [],
-    singleAlbum : []
+    singleAlbum : [],
+    renderSingleAlbum : []
   };
   
   const AlbumReducer = (state = initialState, action) => {
@@ -46,40 +49,25 @@ import {
           albumPool : []
         };
   
-      case REQUEST_COMMENT: {
-        let comment = {...state.comment}
-        comment[action.payload.postId] = action.payload.comment
-  
-        return {
-          ...state,
-          comment : comment
-        };
-      }
-  
-      case SEARCH:
+      case SEARCH_ALBUM:
         return {
           ...state,
           albumPool: action.payload,
           toBeRenderedAlbums : action.payload
         };
-  
-      case PAGINATED_ALBUM: {
-        const toBeRenderedAlbums = state.albumPool.slice(
-          action.payload.start,
-          action.payload.end
-        );
-  
+
+        case SEARCH_PHOTO:
         return {
           ...state,
-          toBeRenderedAlbums : toBeRenderedAlbums
-        }
-      }
+          renderSingleAlbum : action.payload
+        };
   
       case REQUEST_SINGLE_ALBUM :
         return {
           ...state,
           loading : false,
-          singleAlbum : action.payload
+          singleAlbum : action.payload,
+          renderSingleAlbum : action.payload
         }
       default:
         return state;

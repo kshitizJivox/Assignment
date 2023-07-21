@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import classes from "./Layout.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { requestingAlbum, requestingSingleAlbum } from "../redux/AlbumAction";
+import { requestingAlbum, requestingSingleAlbum, searchPhotoHandler } from "../redux/AlbumAction";
 import { useLocation, useNavigate } from "react-router-dom";
 import Photo from "../Photo/Photo";
+import SearchBar from "../../../utility/SearchBar/SearchBar";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function Layout() {
   const navigate = useNavigate();
   const loading = useSelector((state) => state.album.loading);
   const singleAlbum = useSelector((state) => state.album.singleAlbum);
+  const renderSingleAlbum = useSelector(state => state.album.renderSingleAlbum)
   const albums = useSelector((state) => state.album.albums);
   const albumId = location.pathname.split("/")[2];
   let albumTitle = null;
@@ -22,12 +24,6 @@ function Layout() {
   useEffect(() => {
     dispatch(requestingAlbum());
     dispatch(requestingSingleAlbum(albumId));
-    // if (!loading && albums.length != 0) {
-    //   console.log(albums);
-    //   albumTitle = albums[Math.floor((albumId - 1) / 10)][(albumId - 1) % 10].title;
-    //   console.log(albumTitle);
-    // }
-  
   }, [location]);
 
   const prevHandler = () => {
@@ -50,6 +46,10 @@ function Layout() {
 
   return (
     <div className={classes.mainContainer}>
+      <SearchBar
+        placeholder="Search by photo title..."
+        searchResultHandler={(val) => dispatch(searchPhotoHandler(val, singleAlbum))}
+      />
       <div className={classes.postButtonContainer}>
         <span onClick={() => prevHandler()}>{"< "} Prev</span>
         <span>
@@ -57,9 +57,11 @@ function Layout() {
         </span>
         <span onClick={() => nextHandler()}>Next {">"}</span>
       </div>
+
+      
       <div className={classes.photoContainer}>
-        {singleAlbum &&
-          singleAlbum.map((photo, i) => {
+        {renderSingleAlbum &&
+          renderSingleAlbum.map((photo, i) => {
             return <Photo photoData={photo} key={i} />;
           })}
       </div>
