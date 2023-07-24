@@ -35,7 +35,7 @@ function TodoBlock({ todo }) {
       <div className={classes.todoContainer}>
         <h4>Todo :</h4>
         <ul className={classes.todo}>
-          {todo.map((todo, i) => {
+          {todo.length > 0 && todo.map((todo, i) => {
             return (
               <li
                 className={
