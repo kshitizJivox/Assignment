@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import UserPhoto from "../../../assets/userPhoto.jpeg";
 import axios from "axios";
+import Error404 from '../../Error404/Error404'
 
 function PostLayout() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function PostLayout() {
   const post = useSelector((state) => state.homepage.singlePost);
   const loading = useSelector((state) => state.homepage.loading);
   const [userData, setUserData] = useState({});
+  const [isValid, setIsValid] = useState(true)
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
@@ -29,7 +31,9 @@ function PostLayout() {
 
   useEffect(() => {
     const postId = location.pathname.split("/")[2];
-    dispatch(requestingSinglePost(postId));
+    if(postId >= 1 && postId <= 100){
+      dispatch(requestingSinglePost(postId));
+    } else setIsValid(false)
   }, [location]);
 
   const prevHandler = () => {
@@ -50,26 +54,24 @@ function PostLayout() {
     }
   };
 
-  return (
-    <div className={classes.mainContainer}>
-      <div className={classes.wrapper}>
-        <div className={classes.userDataContainer}>
-          <img src={UserPhoto} />
-          <div>
-            <p>{userData.username}</p>
-            <p>{userData.email}</p>
-          </div>
-        </div>
-        <div className={classes.postContainer}>
-          {post && post.id && !loading && <Post postData={post} />}
-        </div>
-        <div className={classes.postButtonContainer}>
-          <span onClick={() => prevHandler()}>{"< "} Prev</span>
-          <span onClick={() => nextHandler()}>Next {">"}</span>
+  return isValid ? (<div className={classes.mainContainer}>
+    <div className={classes.wrapper}>
+      <div className={classes.userDataContainer}>
+        <img src={UserPhoto} />
+        <div>
+          <p>{userData.username}</p>
+          <p>{userData.email}</p>
         </div>
       </div>
+      <div className={classes.postContainer}>
+        {post && post.id && !loading && <Post postData={post} />}
+      </div>
+      <div className={classes.postButtonContainer}>
+        <span onClick={() => prevHandler()}>{"< "} Prev</span>
+        <span onClick={() => nextHandler()}>Next {">"}</span>
+      </div>
     </div>
-  );
+  </div>) : <Error404/>
 }
 
 export default PostLayout;

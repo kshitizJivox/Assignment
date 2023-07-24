@@ -5,7 +5,7 @@ function Error404() {
   return (
     <div className={classes.mainContainer}>
       <h1>Invalid URL</h1>
-      <p>Page not found.</p>
+      <p>Please check the url.</p>
     </div>
   )
 }
