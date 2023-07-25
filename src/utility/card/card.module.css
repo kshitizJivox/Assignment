@@ -1,0 +1,42 @@
+.mainContainer {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContainer:hover {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.mainContainer img{
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+}
+
+.titleContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  height: 40%;
+  margin: 0;
+  border-radius: 0 0 8px 8px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 14px;
+  padding: 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -61,14 +61,6 @@ function App() {
               </Authroute>
             }
           />
-          <Route
-              path="todo/:id"
-              element={
-                <Authroute>
-                  <UserTodo />
-                </Authroute>
-              }
-            />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Error404 />} />
         </Routes>

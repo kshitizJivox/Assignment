@@ -1,4 +1,3 @@
 export const REQUEST_TODO = "REQUEST_TODO"
 export const SUCCESS_TODO = "SUCCESS_TODO"
 export const SEARCH = "SEARCH"
-export const REQUEST_SINGLE_TODO = "REQUEST_SINGLE_TODO"

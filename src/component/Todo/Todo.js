@@ -2,16 +2,17 @@ import React, { useEffect } from 'react'
 import classes from './Todo.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { requestTodo, searchResultHandler } from './redux/TodoAction';
-import ContentHolder from '../../utility/contentHolder/ContentHolder';
 import SearchBar from '../../utility/SearchBar/SearchBar';
+import UserTodo from './UserTodo/UserTodo'
 
 function Todo() {
   const dispatch = useDispatch();
-  const todoList = useSelector(state => state.todo.todo);
   const allTodo = useSelector(state => state.todo.allTodo);
 
   useEffect(() => {
-    dispatch(requestTodo())
+    let userData = localStorage.getItem('userData');
+    userData = JSON.parse(userData)
+    dispatch(requestTodo(userData.id))
   }, [])
 
   return (
@@ -20,7 +21,7 @@ function Todo() {
         placeholder="Search by todo-item..."
         searchResultHandler={(val) => dispatch(searchResultHandler(val, allTodo))}
       />
-      <ContentHolder content={todoList} type={3}/>
+      <UserTodo />
     </div>
   )
 }

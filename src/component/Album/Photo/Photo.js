@@ -3,7 +3,6 @@ import classes from "./Photo.module.css";
 
 function Photo({ photoData }) {
   const photo = photoData;
-
   return (
     <div className={classes.mainContainer}>
       <img src={photo.url} loading="lazy"/>

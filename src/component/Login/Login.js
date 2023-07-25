@@ -10,7 +10,7 @@ function Login() {
   const error = useSelector((state) => state.login.error);
   const auth = useSelector((state) => state.login.auth);
   const userData = useSelector((state) => state.login.userData);
-  const prevRoute = useSelector((state) => state.login.prevRoute)
+  const prevRoute = useSelector((state) => state.login.prevRoute);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Login() {
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
-    if (userData !== null){
+    if (userData !== null) {
       dispatch(loginHandler(JSON.parse(userData)));
     }
   }, []);
@@ -61,6 +61,17 @@ function Login() {
             Login
           </button>
         </div>
+
+        <p>
+          <a
+            href="https://jsonplaceholder.typicode.com/users"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Here
+          </a>{" "}
+          is the list of users.
+        </p>
       </div>
     </div>
   );

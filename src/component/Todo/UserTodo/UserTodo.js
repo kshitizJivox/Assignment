@@ -1,75 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { requestSingleTodo } from "../redux/TodoAction";
+import { useSelector } from "react-redux";
 
 import classes from "./UserTodo.module.css";
 import UserPhoto from "../../../assets/userPhoto.jpeg";
-import axios from "axios";
 import NewTodo from "./NewTodo/NewTodo";
-import Error404 from "../../Error404/Error404";
 
 function UserTodo() {
   const [userData, setUserData] = useState({});
-  const [userId, setUserId] = useState(1);
-  const [isValid, setIsValid] = useState(true)
-  const userTodo = useSelector((state) => state.todo.userTodo);
+  const userTodo = useSelector((state) => state.todo.todo);
   const loading = useSelector((state) => state.todo.loading);
-  const location = useLocation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [selectedTodo, setSelectedTodo] = useState({
     title: "",
     completed: false,
     id: "",
     edit: false,
-    userId: location.pathname.split("/")[2],
+    userId: userData.id,
   });
 
   useEffect(() => {
-    if(selectedTodo.userId >= 1 && selectedTodo.userId <= 10){
-      setUserId(location.pathname.split("/")[2]);
-      dispatch(requestSingleTodo(location.pathname.split("/")[2]));
-    } else setIsValid(false)
-    
-  }, [location]);
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
-      const users = res.data;
-      users.map((user) => {
-        if (user.id == userId) {
-          setUserData(user);
-        }
-      });
-    });
-  }, [userTodo]);
-
-  const prevHandler = () => {
-    let id = Number(userId);
-
-    if (id > 1) {
-      id--;
-      navigate("/todo/" + id);
-    }
-  };
-
-  const nextHandler = () => {
-    let id = Number(userId);
-
-    if (id < 10) {
-      id++;
-      navigate("/todo/" + id);
-    }
-  };
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    setUserData(userData)
+  }, [])
 
   const editTodoHandler = (todo) => {
     let temp = { ...todo, edit: true };
     setSelectedTodo(temp);
   };
 
-  return isValid ? (<div className={classes.mainContainer}>
+  return <div className={classes.mainContainer}>
     <div className={classes.wrapper}>
       <div className={classes.userDataContainer}>
         <img src={UserPhoto} />
@@ -99,15 +58,11 @@ function UserTodo() {
             );
           })}
       </div>
-      <div className={classes.postButtonContainer}>
-        <span onClick={() => prevHandler()}>{"< "} Prev</span>
-        <span onClick={() => nextHandler()}>Next {">"}</span>
-      </div>
     </div>
     <div className={classes.newTodoContainer}>
       <NewTodo todoData={selectedTodo} setTodoData={setSelectedTodo} />
     </div>
-  </div>) : <Error404/>
+  </div>
 }
 
 export default UserTodo;

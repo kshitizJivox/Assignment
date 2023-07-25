@@ -9,7 +9,6 @@ const initialState = {
   allTodo: [],
   todo: [],
   loading: false,
-  userTodo: [],
 };
 
 export const TodoReducer = (state = initialState, action) => {
@@ -25,12 +24,6 @@ export const TodoReducer = (state = initialState, action) => {
         loading: false,
         allTodo : action.payload,
         todo: action.payload
-      };
-    case REQUEST_SINGLE_TODO:
-      return {
-        ...state,
-        userTodo: action.payload,
-        loading: false,
       };
     case SEARCH:
       return {
