@@ -1,18 +1,19 @@
 import { useLocation } from "react-router-dom";
 import { addTodo } from "../../redux/TodoAction";
 import classes from "./NewTodo.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function NewTodo({ todoData, setTodoData }) {
   const dispatch = useDispatch();
-  const location = useLocation();
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const todo = useSelector((state) => state.todo.todo);
 
   const initialTodoData = {
     title: "",
     completed: false,
-    id: "",
+    id: (Number(userData.id) - 1) * 10 + todo.length + 1,
     edit: false,
-    userId: location.pathname.split("/")[2],
+    userId: userData.id,
   };
 
   const changeTitleHandler = (value) => {
@@ -21,9 +22,13 @@ function NewTodo({ todoData, setTodoData }) {
   };
 
   const todoHandler = () => {
-    let temp = todoData;
+    let temp = {
+      ...todoData,
+      id: (Number(userData.id) - 1) * 10 + todo.length + 1,
+    };
     delete temp["edit"];
-    setTodoData(initialTodoData)
+
+    setTodoData(initialTodoData);
     dispatch(addTodo(temp));
   };
 

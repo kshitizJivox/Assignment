@@ -15,7 +15,7 @@ function UserTodo() {
   const [selectedTodo, setSelectedTodo] = useState({
     title: "",
     completed: false,
-    id: "",
+    id: (Number(userData.id) - 1) * 10 + userTodo.length + 1,
     edit: false,
     userId: userData.id,
   });

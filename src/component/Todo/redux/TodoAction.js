@@ -35,10 +35,10 @@ export const searchResultHandler = (val, todo) => {
   };
 };
 
-export const addTodo = (task) => {
+export const addTodo = (todo) => {
   return {
     type : ADD,
-    payload : task
+    payload : todo
   }
 }
 
