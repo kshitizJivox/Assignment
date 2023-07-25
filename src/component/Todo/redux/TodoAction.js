@@ -1,7 +1,9 @@
 import axios from "axios";
 import {
+  ADD,
   REQUEST_TODO,
   SEARCH,
+  STATUS_CHANGED,
   SUCCESS_TODO,
 } from "./TodoActionType";
 
@@ -33,6 +35,23 @@ export const searchResultHandler = (val, todo) => {
   };
 };
 
+export const addTodo = (task) => {
+  return {
+    type : ADD,
+    payload : task
+  }
+}
+
+export const todoStatusHandler = (e, todoId) => {
+  return {
+    type : STATUS_CHANGED,
+    payload : {
+      id : todoId,
+      status : e.target.checked
+    }
+  }
+}
+
 export const requestTodo = (userId) => {
   return (dispatch) => {
     dispatch(fetchingTodo());
@@ -40,13 +59,5 @@ export const requestTodo = (userId) => {
     axios.get("https://jsonplaceholder.typicode.com/user/" + userId + "/todos").then((res) => {
       dispatch(successTodo(res.data));
     });
-  };
-};
-
-export const addTodo = (userId, todoData) => {
-  return (dispatch) => {
-    dispatch(fetchingTodo());
-
-    
   };
 };

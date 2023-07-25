@@ -1,7 +1,9 @@
 import {
+  ADD,
   REQUEST_SINGLE_TODO,
   REQUEST_TODO,
   SEARCH,
+  STATUS_CHANGED,
   SUCCESS_TODO,
 } from "./TodoActionType";
 
@@ -30,6 +32,33 @@ export const TodoReducer = (state = initialState, action) => {
         ...state,
         todo: action.payload,
       };
+    case ADD : {
+      let temp = [...state.todo]
+      temp.reverse();
+      temp = [...temp, action.payload]
+      temp.reverse();
+
+      return {
+        ...state,
+        todo: temp
+      }
+    }
+
+    case STATUS_CHANGED: {
+      let temp = [...state.todo];
+      console.log(action.payload);
+      temp.map((todo) => {
+        if(todo.id == action.payload.id){
+          todo.completed = action.payload.status
+        }
+      })
+
+      return {
+        ...state,
+        todo : temp
+      }
+    }
+      
     default:
       return state;
   }

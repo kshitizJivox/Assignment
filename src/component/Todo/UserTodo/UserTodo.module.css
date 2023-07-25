@@ -67,6 +67,7 @@
 
 .todoItem input{
     margin-right: 10px;
+    cursor: pointer;
 }
 .postButtonContainer{
     display: flex;

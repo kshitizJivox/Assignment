@@ -20,10 +20,11 @@ function NewTodo({ todoData, setTodoData }) {
     setTodoData(temp);
   };
 
-  const submitHandler = () => {
+  const todoHandler = () => {
     let temp = todoData;
     delete temp["edit"];
-    dispatch(addTodo(todoData.userId, temp));
+    setTodoData(initialTodoData)
+    dispatch(addTodo(temp));
   };
 
   return (
@@ -62,7 +63,7 @@ function NewTodo({ todoData, setTodoData }) {
         {todoData.edit && (
           <button onClick={() => setTodoData(initialTodoData)}>Discard</button>
         )}
-        <button onClick={() => submitHandler()}>Submit</button>
+        <button onClick={() => todoHandler()}>Submit</button>
       </div>
     </div>
   );
