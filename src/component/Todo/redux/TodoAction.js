@@ -5,6 +5,7 @@ import {
   SEARCH,
   STATUS_CHANGED,
   SUCCESS_TODO,
+  UPDATE,
 } from "./TodoActionType";
 
 export const fetchingTodo = () => {
@@ -38,6 +39,13 @@ export const searchResultHandler = (val, todo) => {
 export const addTodo = (todo) => {
   return {
     type : ADD,
+    payload : todo
+  }
+}
+
+export const updateTodo = (todo) => {
+  return {
+    type : UPDATE,
     payload : todo
   }
 }

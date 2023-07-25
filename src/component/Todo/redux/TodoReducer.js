@@ -5,6 +5,7 @@ import {
   SEARCH,
   STATUS_CHANGED,
   SUCCESS_TODO,
+  UPDATE,
 } from "./TodoActionType";
 
 const initialState = {
@@ -40,7 +41,26 @@ export const TodoReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        todo: temp
+        todo: temp,
+        allTodo : temp
+      }
+    }
+
+    case UPDATE:{
+      let temp = [...state.todo];
+      let newTodo = [];
+
+      temp.map((todo) => {
+        if(todo.id == action.payload.id){
+          newTodo.push(action.payload)
+        } else 
+          newTodo.push(todo)
+      })
+
+      return {
+        ...state,
+        todo : newTodo,
+        allTodo : newTodo
       }
     }
 
@@ -55,7 +75,8 @@ export const TodoReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        todo : temp
+        todo : temp,
+        allTodo : temp
       }
     }
       

@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { addTodo } from "../../redux/TodoAction";
+import { addTodo, updateTodo } from "../../redux/TodoAction";
 import classes from "./NewTodo.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,14 +22,19 @@ function NewTodo({ todoData, setTodoData }) {
   };
 
   const todoHandler = () => {
-    let temp = {
-      ...todoData,
-      id: (Number(userData.id) - 1) * 10 + todo.length + 1,
-    };
+    let temp = { ...todoData };
     delete temp["edit"];
 
     setTodoData(initialTodoData);
-    dispatch(addTodo(temp));
+    if (todoData.edit) {
+      dispatch(updateTodo(temp));
+    } else {
+      temp = {
+        ...temp,
+        id: (Number(userData.id) - 1) * 20 + todo.length + 1,
+      };
+      dispatch(addTodo(temp));
+    }
   };
 
   return (
@@ -42,28 +47,6 @@ function NewTodo({ todoData, setTodoData }) {
         value={todoData.title}
         onChange={(e) => changeTitleHandler(e.target.value)}
       />
-      {todoData.edit && (
-        <div className={classes.statusContainer}>
-          <span>Status : </span>
-          <label>
-            <input
-              type="radio"
-              name="status"
-              defaultChecked={todoData.completed}
-            />
-            Completed
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="status"
-              defaultChecked={!todoData.completed}
-            />
-            Incompleted
-          </label>
-        </div>
-      )}
-
       <div className={classes.buttonContainer}>
         {todoData.edit && (
           <button onClick={() => setTodoData(initialTodoData)}>Discard</button>
