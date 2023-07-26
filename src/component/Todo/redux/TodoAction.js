@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   ADD,
+  DELETE,
   REQUEST_TODO,
   SEARCH,
   STATUS_CHANGED,
@@ -57,6 +58,13 @@ export const todoStatusHandler = (e, todoId) => {
       id : todoId,
       status : e.target.checked
     }
+  }
+}
+
+export const deleteTodo = (todoId) => {
+  return {
+    type : DELETE,
+    payload : todoId
   }
 }
 

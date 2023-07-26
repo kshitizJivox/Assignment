@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./UserTodo.module.css";
 import UserPhoto from "../../../assets/userPhoto.jpeg";
 import NewTodo from "./NewTodo/NewTodo";
-import { todoStatusHandler } from "../redux/TodoAction";
+import { deleteTodo, todoStatusHandler } from "../redux/TodoAction";
+import { MdDelete } from "react-icons/md";
 
 function UserTodo() {
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -55,6 +56,10 @@ function UserTodo() {
                     onChange={(e) => dispatch(todoStatusHandler(e, todo.id))}
                   />
                   <span>{todo.title}</span>
+                  <MdDelete
+                    className={classes.deleteButton}
+                    onClick={() => dispatch(deleteTodo(todo.id))}
+                  />
                 </span>
               );
             })}

@@ -1,5 +1,6 @@
 import {
   ADD,
+  DELETE,
   REQUEST_SINGLE_TODO,
   REQUEST_TODO,
   SEARCH,
@@ -25,61 +26,70 @@ export const TodoReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        allTodo : action.payload,
-        todo: action.payload
+        allTodo: action.payload,
+        todo: action.payload,
       };
     case SEARCH:
       return {
         ...state,
         todo: action.payload,
       };
-    case ADD : {
-      let temp = [...state.todo]
+    case ADD: {
+      let temp = [...state.todo];
       temp.reverse();
-      temp = [...temp, action.payload]
+      temp = [...temp, action.payload];
       temp.reverse();
 
       return {
         ...state,
         todo: temp,
-        allTodo : temp
-      }
+        allTodo: temp,
+      };
     }
 
-    case UPDATE:{
+    case UPDATE: {
       let temp = [...state.todo];
       let newTodo = [];
 
       temp.map((todo) => {
-        if(todo.id == action.payload.id){
-          newTodo.push(action.payload)
-        } else 
-          newTodo.push(todo)
-      })
+        if (todo.id == action.payload.id) {
+          newTodo.push(action.payload);
+        } else newTodo.push(todo);
+      });
 
       return {
         ...state,
-        todo : newTodo,
-        allTodo : newTodo
-      }
+        todo: newTodo,
+        allTodo: newTodo,
+      };
     }
 
     case STATUS_CHANGED: {
       let temp = [...state.todo];
       console.log(action.payload);
       temp.map((todo) => {
-        if(todo.id == action.payload.id){
-          todo.completed = action.payload.status
+        if (todo.id == action.payload.id) {
+          todo.completed = action.payload.status;
         }
-      })
+      });
 
       return {
         ...state,
-        todo : temp,
-        allTodo : temp
-      }
+        todo: temp,
+        allTodo: temp,
+      };
     }
-      
+
+    case DELETE: {
+      let temp = [...state.todo];
+      temp = temp.filter((todo) => todo.id != action.payload);
+      return {
+        ...state,
+        todo: temp,
+        allTodo: temp,
+      };
+    }
+
     default:
       return state;
   }
